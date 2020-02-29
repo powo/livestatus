@@ -1,11 +1,23 @@
 #!/bin/env python3
+# -*- coding: utf8 -*-
 from fastapi import FastAPI
+from starlette.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from starlette.responses import StreamingResponse
 import asyncio
 import json
 
 app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    # allow_origins=["http://localhost:3000", "http://localhost:8080",],
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 
 class State(object):
     def __init__(self):
